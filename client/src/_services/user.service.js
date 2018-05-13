@@ -5,8 +5,6 @@ export const userService = {
     login,
     logout,
     register,
-    getAll,
-    getById,
     getByUsername,
     update,
     delete: _delete
@@ -19,7 +17,7 @@ function login(email, password) {
         body: JSON.stringify({email, password})
     };
 
-    return fetch(urlConstants.BASE_URL + '/user/login', requestOptions)
+    return fetch(urlConstants.LOGIN_URL, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return Promise.reject(response.statusText);
@@ -43,31 +41,13 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch('/users', requestOptions).then(handleResponse);
-}
-
-function getById(_id) {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch('/users/' + _id, requestOptions).then(handleResponse);
-}
-
 function getByUsername(username) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch(urlConstants.BASE_URL + '/user/' + username, requestOptions).then(handleResponse);
+    return fetch(urlConstants.USER_API_URL + username, requestOptions).then(handleResponse);
 }
 
 function register(user) {
@@ -77,7 +57,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(urlConstants.BASE_URL + '/user', requestOptions).then(handleResponse);
+    return fetch(urlConstants.USER_BASE_URL, requestOptions).then(handleResponse);
 }
 
 function update(user) {

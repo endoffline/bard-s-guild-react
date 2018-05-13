@@ -9,7 +9,7 @@ class HomePage extends React.Component {
         this.props.dispatch(sheetActions.getAll(this.props.user.id));
     }
 
-    handleDeleteUser(id) {
+    handleDeleteSheet(id) {
         return (e) => this.props.dispatch(sheetActions.delete(id));
     }
 
@@ -25,12 +25,12 @@ class HomePage extends React.Component {
                 {sheets.items &&
                 <ul>
                     {sheets.items.map((sheet, index) =>
-                        <li key={sheet.id}>
-                            {sheet.name + ' ' + user.playerclass}
+                        <li key={sheet._id}>
+                            {sheet.name + ' ' + sheet.playerclass}
                             {
-                                user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
+                                sheet.deleting ? <em> - Deleting...</em>
+                                    : sheet.deleteError ? <span className="text-danger"> - ERROR: {sheet.deleteError}</span>
+                                    : <span> - <a onClick={this.handleDeleteSheet(sheet._id)}>Delete</a></span>
                             }
                         </li>
                     )}
@@ -38,6 +38,7 @@ class HomePage extends React.Component {
                 }
                 <p>
                     <Link to="/login">Logout</Link>
+                    <Link to="/sheet">Create new Character</Link>
                 </p>
             </div>
         );

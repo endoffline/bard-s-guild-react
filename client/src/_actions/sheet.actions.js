@@ -1,10 +1,45 @@
 import { sheetConstants } from '../_constants';
 import { sheetService } from '../_services';
+import {alertActions} from './';
+import {history} from '../_helpers';
+
 export const sheetActions = {
+    create,
     getOne,
     getAll,
     delete: _delete
 };
+
+function create(sheet) {
+    return dispatch => {
+        dispatch(request(sheet));
+
+        sheetService.create(sheet)
+            .then(
+                sheet => {
+                    dispatch(success());
+                    history.push('/');
+                    dispatch(alertActions.success('Character was created successfully'));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(sheet) {
+        return {type: sheetConstants.CREATE_REQUEST, sheet}
+    }
+
+    function success(sheet) {
+        return {type: sheetConstants.CREATE_SUCCESS, sheet}
+    }
+
+    function failure(error) {
+        return {type: sheetConstants.CREATE_FAILURE, error}
+    }
+}
 
 function getOne(id) {
 

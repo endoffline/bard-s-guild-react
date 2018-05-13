@@ -260,7 +260,7 @@ apiRoutes.get('/user', function (req, res) {
 apiRoutes.get('/sheets/:userid', function (req, res) {
 
     Sheet.find({user: req.params.userid})
-        .select('_id name created lastUpdate')
+        .select('id name created lastUpdate')
         .exec(function (err, docs) {
             if (err) console.log(err);
             if (docs) {
@@ -298,7 +298,7 @@ apiRoutes.post('/sheet', function (req, res) {
                 sheet._id = new mongoose.Types.ObjectId();
                 sheet.created = new Date();
                 sheet.lastUpdate = new Date();
-                sheet.user = user._id;
+                sheet.user = user.id;
 
                 sheet.save(function (err) {
                     if (err) console.log(err);
@@ -309,7 +309,7 @@ apiRoutes.post('/sheet', function (req, res) {
 
                         res.json({
                             message: 'success',
-                            _id: sheet._id
+                            id: sheet.id
                         });
 
                     });
