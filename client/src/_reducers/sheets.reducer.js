@@ -1,4 +1,4 @@
-import {sheetConstants} from '../_constants';
+import {sheetConstants, userConstants} from '../_constants';
 
 export function sheets(state = {}, action) {
     switch (action.type) {
@@ -9,13 +9,32 @@ export function sheets(state = {}, action) {
             return {};
         case sheetConstants.CREATE_FAILURE:
             return {};
+        case sheetConstants.UPDATE_REQUEST:
+            return { sheet: action.sheet,
+                saving: true };
+        case sheetConstants.UPDATE_SUCCESS:
+            return {};
+        case sheetConstants.UPDATE_FAILURE:
+            return {};
+        case userConstants.GET_REQUEST:
+            return {
+                loading: true
+            };
+        case userConstants.GET_SUCCESS:
+            return {
+                sheet: action.sheet
+            };
+        case userConstants.GET_FAILURE:
+            return {
+                error: action.error
+            };
         case sheetConstants.GETALL_REQUEST:
             return {
                 loading: true
             };
         case sheetConstants.GETALL_SUCCESS:
             return {
-                items: action.sheets
+                sheets: action.sheets
             };
         case sheetConstants.GETALL_FAILURE:
             return {

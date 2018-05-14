@@ -22,11 +22,11 @@ class HomePage extends React.Component {
                 <h3>Your sheets:</h3>
                 {sheets.loading && <em>Loading sheets...</em>}
                 {sheets.error && <span className="text-danger">ERROR: {sheets.error}</span>}
-                {sheets.items &&
+                {sheets.sheets &&
                 <ul>
-                    {sheets.items.map((sheet, index) =>
+                    {sheets.sheets.map((sheet, index) =>
                         <li key={sheet._id}>
-                            {sheet.name + ' ' + sheet.playerclass}
+                            <Link to="/sheet">{sheet.name + ' ' + sheet.playerclass}</Link>
                             {
                                 sheet.deleting ? <em> - Deleting...</em>
                                     : sheet.deleteError ? <span className="text-danger"> - ERROR: {sheet.deleteError}</span>

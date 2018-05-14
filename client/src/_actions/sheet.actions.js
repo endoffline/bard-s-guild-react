@@ -5,7 +5,8 @@ import {history} from '../_helpers';
 
 export const sheetActions = {
     create,
-    getOne,
+    update,
+    get,
     getAll,
     delete: _delete
 };
@@ -41,8 +42,51 @@ function create(sheet) {
     }
 }
 
-function getOne(id) {
+function update(sheet) {
+    return dispatch => {
+        dispatch(request(sheet));
 
+        sheetService.update(sheet)
+            .then(
+                sheet => {
+                    dispatch(success());
+                    history.push('/');
+                    dispatch(alertActions.success('Character was updated successfully'));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(sheet) {
+        return {type: sheetConstants.UPDATE_REQUEST, sheet}
+    }
+
+    function success(sheet) {
+        return {type: sheetConstants.UPDATE_SUCCESS, sheet}
+    }
+
+    function failure(error) {
+        return {type: sheetConstants.UPDATE_FAILURE, error}
+    }
+}
+
+function get(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        sheetService.get(id)
+            .then(
+                sheet => dispatch(success(sheet)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request(id) { return { type: sheetConstants.GET_REQUEST, id } }
+    function success(sheet) { return { type: sheetConstants.GET_SUCCESS, sheet } }
+    function failure(error) { return { type: sheetConstants.GET_FAILURE, error } }
 }
 
 function getAll(userid) {
