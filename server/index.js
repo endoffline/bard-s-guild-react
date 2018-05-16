@@ -271,7 +271,7 @@ apiRoutes.get('/sheets/:userid', function (req, res) {
         });
 });
 
-apiRoutes.get('/sheet/:id', function (req, res) {
+apiRoutes.get('/sheet/:_id', function (req, res) {
     Sheet.findById(req.params._id, function (err, sheet) {
             if (err) console.log(err);
             if (sheet) {

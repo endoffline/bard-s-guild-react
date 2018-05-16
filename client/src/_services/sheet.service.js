@@ -3,6 +3,8 @@ import { urlConstants } from '../_constants';
 
 export const sheetService = {
     create,
+    update,
+    get,
     getAll,
     delete: _delete
 };
@@ -15,6 +17,25 @@ function create(sheet) {
     };
     console.log(sheet);
     return fetch(urlConstants.SHEET_API_URL, requestOptions).then(handleResponse);
+}
+
+function update(sheet) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: authHeaderJSON(),
+        body: JSON.stringify(sheet)
+    };
+    console.log(sheet);
+    return fetch(urlConstants.SHEET_API_URL, requestOptions).then(handleResponse);
+}
+
+function get(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeaderJSON()
+    };
+
+    return fetch( urlConstants.SHEET_API_URL + '/' + id, requestOptions).then(handleResponse);
 }
 
 function getAll(userid) {

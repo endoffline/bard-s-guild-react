@@ -4,6 +4,8 @@ import {alertActions} from './';
 import {history} from '../_helpers';
 
 export const sheetActions = {
+    initialize,
+    change,
     create,
     update,
     get,
@@ -11,6 +13,13 @@ export const sheetActions = {
     delete: _delete
 };
 
+function initialize(userid) {
+    return {type: sheetConstants.INITIALIZE, userid}
+}
+
+function change(name, value) {
+    return {type: sheetConstants.CHANGE, name, value}
+}
 function create(sheet) {
     return dispatch => {
         dispatch(request(sheet));
