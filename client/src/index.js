@@ -6,7 +6,7 @@ import { store } from './_helpers';
 import { App } from './App';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+//import 'bootstrap/dist/css/bootstrap-theme.css';
 
 render(
     <Provider store={store}>
