@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Col, Container, Jumbotron, Row } from 'reactstrap';
+import { Alert, Col, Container, Jumbotron, Row } from 'reactstrap';
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
 import { PrivateRoute, Navigation } from '../_components';
@@ -33,19 +33,19 @@ class App extends React.Component {
                             <Row>
                                 <Col>
                                     {alert.message &&
-                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                    <Alert color={alert.type}>{alert.message}</Alert>
                                     }
                                 </Col>
                             </Row>
-                            <Row>
-                                <PrivateRoute exact path="/" component={HomePage} />
-                                <Route path="/login" component={LoginPage} />
-                                <Route path="/register" component={RegisterPage} />
-                                <Switch>
-                                    <PrivateRoute exact path="/sheet" component={SheetPage} />
-                                    <PrivateRoute path="/sheet/:id" component={SheetPage} />
-                                </Switch>
-                            </Row>
+
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <Route path="/login" component={LoginPage} />
+                            <Route path="/register" component={RegisterPage} />
+                            <Switch>
+                                <PrivateRoute exact path="/sheet" component={SheetPage} />
+                                <PrivateRoute path="/sheet/:id" component={SheetPage} />
+                            </Switch>
+
                         </Container>
                     </Jumbotron>
                 </div>

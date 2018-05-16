@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { Col, Container, Jumbotron, Row } from 'reactstrap';
+import './Sheet.scss';
 import { sheetActions } from '../_actions';
 
 class SheetPage extends React.Component {
@@ -48,6 +49,7 @@ class SheetPage extends React.Component {
         }
     }
 
+
     render() {
         const { saving  } = this.props;
         const { submitted } = this.state;
@@ -61,13 +63,7 @@ class SheetPage extends React.Component {
                 {sheetid && loading && <em>Loading sheet...</em>}
                 {(!sheetid || sheet._id) &&
                 <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !sheet.name ? ' has-error' : '')}>
-                        <label htmlFor="name">Name</label>
-                        <input type="text" className="form-control" name="name" value={sheet.name} onChange={this.handleChange} />
-                        {submitted && !sheet.name &&
-                        <div className="help-block">Name is required</div>
-                        }
-                    </div>
+                    <BasicInformation submitted={submitted} sheet={sheet} handleChange={this.handleChange} />
                     <div className="form-group">
                         <button className="btn btn-primary">{buttonText}</button>
                         {saving &&
@@ -81,6 +77,31 @@ class SheetPage extends React.Component {
         );
     }
 }
+
+class BaseInformation extends React.Component {
+    render() {
+        return (
+            <div></div>
+        );
+    }
+}
+function BasicInformation(props) {
+    const { handleChange, sheet, submitted } = props;
+    return (
+
+        <Row className="info">
+            <Col xs={{order: 12}} md={{size: 8, order: 1}}>
+                <Row>
+                    <Col xs="auto" className={'small-padding left form-group' + (submitted && !sheet.name ? ' has-error' : '')}>
+                        <input type="text" id="name" className="form-control" name="name" value={sheet.name} onChange={handleChange} />
+                        <label htmlFor="name">Name</label>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
+
+    )
+};
 
 function mapStateToProps(state) {
     const { saving } = state.sheet;

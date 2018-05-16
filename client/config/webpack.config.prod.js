@@ -153,7 +153,7 @@ module.exports = {
               compact: true,
             },
           },
-          {
+          /*{
               test: /\.scss$/,
               loader: ExtractTextPlugin.extract(
                   Object.assign(
@@ -202,8 +202,12 @@ module.exports = {
                   )
               ),
               // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-          },
-
+          },*/
+            {
+                test: /\.scss$/,
+                include: paths.appSrc,
+                loaders: [require.resolve('style-loader'), require.resolve('css-loader'), require.resolve('sass-loader')]
+            },
           // The notation here is somewhat confusing.
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -273,7 +277,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.sass$/, /\.scss$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },

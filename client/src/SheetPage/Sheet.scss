@@ -1,0 +1,125 @@
+label {
+  display: block;
+}
+
+input, select {
+  width: 100%;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.small-padding {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+input[type=number].no-spin::-webkit-inner-spin-button,
+input[type=number].no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 5px 2px;
+  font-size: 14px;
+}
+
+table input {
+  width: 100%;
+}
+
+table input[type=number] {
+  width: 50px;
+}
+
+input[type="number"]:disabled {
+  border-width: 0 0 0 0;
+  /*background-color: #eee;*/
+  text-align: center;
+  width: 100%;
+}
+
+.info input, select {
+  height: 28px;
+  border-width: 0 0 1px 0;
+  border-bottom-color: black;
+  /*background-color: #eee;*/
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+option {
+  overflow: hidden;
+}
+
+.abilities {
+  text-align: center;
+}
+
+.ability {
+  text-align: center;
+}
+
+.tag {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  min-width: 40px;
+  min-height: 28px;
+  padding: 0 10px;
+}
+
+tr.tag {
+  border-color: black;
+  border-collapse: collapse;
+}
+
+.desc {
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.desc-lg {
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.desc-md {
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 10px;
+}
+
+.desc-sm {
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 8px;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
