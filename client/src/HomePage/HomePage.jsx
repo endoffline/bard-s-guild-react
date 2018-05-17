@@ -33,11 +33,13 @@ class HomePage extends React.Component {
                 {sheets.items &&
                 <Table hover>
                     <thead>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Level</th>
-                        <th scope="col"></th>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Level</th>
+                            <th scope="col"></th>
+                        </tr>
                     </thead>
                     <tbody>
                         {sheets.items.map((sheet, index) =>

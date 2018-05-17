@@ -1,4 +1,4 @@
-import { sheetConstants } from '../_constants';
+import { sheetConstants, scopesEnum } from '../_constants';
 import { sheetService } from '../_services';
 import {alertActions} from './';
 import {history} from '../_helpers';
@@ -6,7 +6,7 @@ import {history} from '../_helpers';
 export const sheetActions = {
     initialize,
     change,
-    create,
+create,
     update,
     get,
     getAll,
@@ -17,9 +17,13 @@ function initialize(userid) {
     return {type: sheetConstants.INITIALIZE, userid}
 }
 
-function change(name, value) {
+function change(scope, name, value) {
+    if (scope === scopesEnum.ABILITY) {
+        return {type: sheetConstants.CHANGE_ABILITY, name, value};
+    }
     return {type: sheetConstants.CHANGE, name, value}
 }
+
 function create(sheet) {
     return dispatch => {
         dispatch(request(sheet));

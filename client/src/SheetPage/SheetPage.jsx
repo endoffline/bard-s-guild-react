@@ -6,6 +6,7 @@ import './Sheet.scss';
 
 import {sheetActions} from '../_actions';
 import dnd3_5_logo from './dnd3_5_logo.png';
+import {scopesEnum} from "../_constants";
 
 class SheetPage extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class SheetPage extends React.Component {
         const {dispatch} = this.props;
         dispatch(sheetActions.initialize(props.user.id));
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeAbility = this.handleChangeAbility.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -24,8 +26,14 @@ class SheetPage extends React.Component {
         const {name, value} = event.target;
         const {dispatch} = this.props;
 
+        dispatch(sheetActions.change(scopesEnum.BASIC, name, value));
+    }
 
-        dispatch(sheetActions.change(name, value));
+    handleChangeAbility(event) {
+        const {name, value} = event.target;
+        const {dispatch} = this.props;
+
+        dispatch(sheetActions.change(scopesEnum.ABILITY, name, value));
     }
 
     handleSubmit(event) {
@@ -64,7 +72,7 @@ class SheetPage extends React.Component {
         const {sheet, loading} = this.props;
         const sheetid = this.props.match.params.id;
         var buttonText = (!sheetid) ? 'Create' : 'Save';
-
+        console.log(sheet);
         return (
             <div>
                 <h2 className="row">Character Sheet</h2>
@@ -72,7 +80,7 @@ class SheetPage extends React.Component {
                 {(!sheetid || sheet._id) &&
                 <form name="form" onSubmit={this.handleSubmit}>
                     <BasicInformation submitted={submitted} sheet={sheet} handleChange={this.handleChange}/>
-                    <Abilities submitted={submitted} sheet={sheet} handleChange={this.handleChange}/>
+                    <Abilities submitted={submitted} sheet={sheet} handleChangeAbility={this.handleChangeAbility}/>
                     <div className="form-group">
                         <button className="btn btn-primary">{buttonText}</button>
                         {saving &&
@@ -88,13 +96,6 @@ class SheetPage extends React.Component {
     }
 }
 
-class BaseInformation extends React.Component {
-    render() {
-        return (
-            <div></div>
-        );
-    }
-}
 function BasicInformation(props) {
     const {handleChange, sheet, submitted} = props;
     return (
@@ -151,7 +152,7 @@ function BasicInformation(props) {
                                     <option value="4">Diminutive</option>
                                     <option value="2">Tiny</option>
                                     <option value="1">Small</option>
-                                    <option value="0" selected>Medium</option>
+                                    <option value="0" defaultValue>Medium</option>
                                     <option value="-1">Large</option>
                                     <option value="-2">Huge</option>
                                     <option value="-4">Gargantuan</option>
@@ -225,7 +226,7 @@ function BasicInformation(props) {
 }
 
 function Abilities(props) {
-    const {handleChange, sheet, submitted} = props;
+    const {handleChangeAbility, sheet, submitted} = props;
     return (
         <div className="row">
             <div className="abilities col-12 col-md-4">
@@ -244,13 +245,19 @@ function Abilities(props) {
                         </div>
                     </div>
                 </div>
+                {sheet.abilities && sheet.abilities.map((ability, index) =>
+                    <div key={ability.name}>
+                        <Ability submitted={submitted} sheet={sheet} ability={ability} handleChangeAbility={handleChangeAbility} />
+                    </div>
+                )}
             </div>
         </div>
     );
 }
 
-function Ability (props) {
-    const {handleChange, sheet, ability, submitted} = props;
+function Ability(props) {
+    const {handleChangeAbility, sheet, ability, submitted} = props;
+    //console.log(ability);
     return (
         <div className="row">
             <div className="col-3 text-center">
@@ -263,26 +270,26 @@ function Ability (props) {
                     <div className="col-3 small-padding">
                         <label htmlFor={ability.abbr} className="sr-only">{ability.abbr}</label>
                         <input type="number" name={ability.abbr} id={ability.abbr}
-                               value={ability.score} onChange={handleChange}/>
-                            </div>
-
-                            <div className="col-3 small-padding">
-                                <input disabled type="number" id={ability.abbr + '_am'} name={ability.abbr + '_am'}
-                                       value={() => { return Math.round((ability.score - 10) / 2)}}/>
-                            </div>
-                            <div className="col-3 small-padding">
-                                <label htmlFor={ability.abbr + '_tmp'} className="sr-only">{ability.abbr} Temp</label>
-                                <input type="number" name={ability.abbr + '_tmp'} id={ability.abbr + '_tmp'}
-                                       value={ability.score_tmp} onChange={handleChange}/>
-                            </div>
-                            <div className="col-3 small-padding">
-                                <input disabled type="number" id={ability.abbr + '_tm'} name={ability.abbr + '_tm'}
-                                       value={() => { return Math.round((ability.score_tmp - 10) / 2)}}/>
-                            </div>
-                        </div>
+                               value={ability.score} onChange={handleChangeAbility}/>
                     </div>
 
+                    <div className="col-3 small-padding">
+                        <input disabled type="number" id={ability.abbr + '_am'} name={ability.abbr + '_am'}
+                               value={Math.round((ability.score - 10) / 2)}/>
+                    </div>
+                    <div className="col-3 small-padding">
+                        <label htmlFor={ability.abbr + '_tmp'} className="sr-only">{ability.abbr} Temp</label>
+                        <input type="number" name={ability.abbr + '_tmp'} id={ability.abbr + '_tmp'}
+                               value={ability.score_tmp} onChange={handleChangeAbility}/>
+                    </div>
+                    <div className="col-3 small-padding">
+                        <input disabled type="number" id={ability.abbr + '_tm'} name={ability.abbr + '_tm'}
+                               value={Math.round((ability.score - 10) / 2)}/>
+                    </div>
                 </div>
+            </div>
+        </div>
+
     );
 }
 

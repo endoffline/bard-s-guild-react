@@ -1,6 +1,8 @@
 export const sheetConstants = {
     INITIALIZE: 'SHEETS_INITIALIZE',
     CHANGE: 'SHEETS_CHANGE',
+    CHANGE_ABILITY: 'SHEETS_CHANGE_ABILITY',
+
 
     CREATE_REQUEST: 'SHEETS_CREATE_REQUEST',
     CREATE_SUCCESS: 'SHEETS_CREATE_SUCCESS',
@@ -22,3 +24,17 @@ export const sheetConstants = {
     DELETE_SUCCESS: 'SHEETS_DELETE_SUCCESS',
     DELETE_FAILURE: 'SHEETS_DELETE_FAILURE'
 };
+
+export const scopesEnum = Object.freeze({
+    BASIC: 0,
+    ABILITY: 1,
+});
+
+export const abilitiesEnum = Object.freeze({
+    STR: 0,
+    DEX: 1,
+    CON: 2,
+    INT: 3,
+    WIS: 4,
+    CHA: 5,
+});
