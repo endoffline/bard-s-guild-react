@@ -11,8 +11,8 @@ input, select {
 }
 
 .small-padding {
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
 }
 
 span {
@@ -49,13 +49,15 @@ input[type="number"]:disabled {
   width: 100%;
 }
 
-.info input, select {
-  height: 28px;
-  border-width: 0 0 1px 0;
-  border-bottom-color: black;
-  /*background-color: #eee;*/
-  padding-left: 3px;
-  padding-right: 3px;
+.info {
+  input, select {
+    height: 28px;
+    border-width: 0 0 1px 0;
+    border-bottom-color: black;
+    /*background-color: #eee;*/
+    padding-left: 3px;
+    padding-right: 3px;
+  }
 }
 
 option {
@@ -123,3 +125,5 @@ tr.tag {
 .left {
   float: left;
 }
+
+

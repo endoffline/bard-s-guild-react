@@ -1,28 +1,36 @@
 import {sheetConstants} from '../_constants';
 
-
+const SHEET_TEMPLATE = {
+    _id: '',
+    created: new Date(),
+    lastUpdate: new Date(),
+    user: '',
+    name: '',
+    player: '',
+    playerclass: '',
+    race: '',
+    alignment: '',
+    deity: '',
+    size: '',
+    age: '',
+    gender: '',
+    height: '',
+    weight: '',
+    eyes: '',
+    hair: '',
+    skin: '',
+};
 export function sheet(state = {
     sheet: {
-        _id: '',
-        created: new Date(),
-        lastUpdate: new Date(),
-        user: '',
-        name: '',
-        player: '',
-        playerclass: '',
+        SHEET_TEMPLATE
     }
 }, action) {
     switch (action.type) {
         case sheetConstants.INITIALIZE:
             return {
                 sheet: {
-                    _id: '',
-                    created: new Date(),
-                    lastUpdate: new Date(),
+                    ...SHEET_TEMPLATE,
                     user: action.userid,
-                    name: '',
-                    player: '',
-                    playerclass: '',
                 }
             };
         case sheetConstants.CHANGE:

@@ -260,7 +260,7 @@ apiRoutes.get('/user', function (req, res) {
 apiRoutes.get('/sheets/:userid', function (req, res) {
 
     Sheet.find({user: req.params.userid})
-        .select('id name created lastUpdate')
+        .select('id name playerclass level created lastUpdate')
         .exec(function (err, docs) {
             if (err) console.log(err);
             if (docs) {
