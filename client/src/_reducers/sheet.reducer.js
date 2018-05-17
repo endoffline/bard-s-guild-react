@@ -75,12 +75,18 @@ export function sheet(state = {
             };
         case sheetConstants.CHANGE_ABILITY:
             let abilities = state.sheet.abilities;
-            let i = 0, found = false;
+            let i = 0, found = false, name = '', score_tmp = false;
+            if (action.name.length > 3) {
+                name = action.name.substring(0, 3);
+                score_tmp = true;
+            } else {
+                name = action.name;
+            }
             do {
-                if (abilities[i].abbr === action.name) {
+                if (abilities[i].abbr === name) {
                     abilities[i] = {
                         ...abilities[i],
-                        score: action.value,
+                        [((score_tmp) ? 'score_tmp' : 'score')]: action.value,
                     };
 
                     found = true;

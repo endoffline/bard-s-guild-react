@@ -284,7 +284,7 @@ function Ability(props) {
                     </div>
                     <div className="col-3 small-padding">
                         <input disabled type="number" id={ability.abbr + '_tm'} name={ability.abbr + '_tm'}
-                               value={Math.round((ability.score - 10) / 2)}/>
+                               value={Math.round((ability.score_tmp - 10) / 2)}/>
                     </div>
                 </div>
             </div>
