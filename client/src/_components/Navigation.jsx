@@ -36,7 +36,7 @@ class Navigation extends React.Component {
                                 <NavLink href="/">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/login">Login</NavLink>
+                                <NavLink href="/login">{(this.props.loggedIn) ? 'Logout' : 'Login'}</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
@@ -47,9 +47,9 @@ class Navigation extends React.Component {
     }
 }
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
+    const { loggedIn } = state.authentication;
     return {
-        loggingIn
+        loggedIn
     };
 }
 
