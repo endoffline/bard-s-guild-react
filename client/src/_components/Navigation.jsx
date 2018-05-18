@@ -33,7 +33,7 @@ class Navigation extends React.Component {
             <div>
                 <Navbar color="light" light expand="md">
                     <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
+                    <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <NavLink href="/">Home</NavLink>
