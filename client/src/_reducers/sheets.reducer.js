@@ -37,7 +37,7 @@ export function sheets(state = {}, action) {
                 items: state.items.map(sheet => {
                     if (sheet._id === action.id) {
                         // make copy of sheet without 'deleting:true' property
-                        const {deleting, ...sheetCopy} = sheet;
+                        const {...sheetCopy} = sheet;
                         // return copy of sheet with 'deleteError:[error]' property
                         return {...sheetCopy, deleteError: action.error};
                     }

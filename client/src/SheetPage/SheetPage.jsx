@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Col, Container, Jumbotron, Row} from 'reactstrap';
 import './Sheet.scss';
 
 import {sheetActions} from '../_actions';
 import dnd3_5_logo from './dnd3_5_logo.png';
 import {scopesEnum, abilitiesEnum} from "../_constants";
 
-class SheetPage extends React.Component {
+class SheetPage extends Component {
     constructor(props) {
         super(props);
 
@@ -40,7 +39,7 @@ class SheetPage extends React.Component {
     handleChangeSkill(event) {
         const {name, value, checked} = event.target;
         const {dispatch} = this.props;
-        if (name.substring(0, 11) == 'class_skill') {
+        if (name.substring(0, 11) === 'class_skill') {
             dispatch(sheetActions.change(scopesEnum.SKILL, name, checked));
         } else {
             dispatch(sheetActions.change(scopesEnum.SKILL, name, value));
@@ -62,18 +61,12 @@ class SheetPage extends React.Component {
         }
     }
 
-    handleAbilityScores(event, ability) {
-        this.handleChange(event);
-
-    }
-
-
     componentDidMount() {
-        const {dispatch} = this.props;
-        if (this.props.match.params.id) {
-            dispatch(sheetActions.get(this.props.match.params.id));
+        const {dispatch, match, user} = this.props;
+        if (match.params.id) {
+            dispatch(sheetActions.get(match.params.id));
         } else {
-            dispatch(sheetActions.initialize(this.props.user.id));
+            dispatch(sheetActions.initialize(user.id));
         }
     }
 
@@ -81,9 +74,9 @@ class SheetPage extends React.Component {
     render() {
         const {saving} = this.props;
         const {submitted} = this.state;
-        const {sheet, loading} = this.props;
-        const sheetid = this.props.match.params.id;
-        var buttonText = (!sheetid) ? 'Create' : 'Save';
+        const {sheet, loading, match} = this.props;
+        const sheetid = match.params.id;
+        let buttonText = (!sheetid) ? 'Create' : 'Save';
         //console.log(sheet);
         return (
             <div>
@@ -701,7 +694,7 @@ function Skill(props) {
     );
 }
 
-function Notes(props) {
+function Notes() {
     let rows = [];
 
     for (let i = 0; i < 35; i++) {

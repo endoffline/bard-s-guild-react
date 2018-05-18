@@ -20,12 +20,15 @@ class Navigation extends React.Component {
     }
 
     toggle() {
+        const {isOpen} = this.state;
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpen: !isOpen
         });
     }
 
     render() {
+        const { loggedIn } = this.props;
+        const { isOpen } = this.state;
         return (
             <div>
                 <Navbar color="light" light expand="md">
@@ -36,7 +39,7 @@ class Navigation extends React.Component {
                                 <NavLink href="/">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/login">{(this.props.loggedIn) ? 'Logout' : 'Login'}</NavLink>
+                                <NavLink href="/login">{(loggedIn) ? 'Logout' : 'Login'}</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

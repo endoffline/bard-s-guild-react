@@ -1,19 +1,5 @@
 import {sheetConstants, abilitiesEnum} from '../_constants';
 
-const ABILITIES = [
-    {id: 0, abbr: 'str', name: 'Strength'},
-    {id: 1, abbr: 'dex', name: 'Dexterity'},
-    {id: 2, abbr: 'con', name: 'Constitution'},
-    {id: 3, abbr: 'int', name: 'Intelligence'},
-    {id: 4, abbr: 'wis', name: 'Wisdom'},
-    {id: 5, abbr: 'cha', name: 'Charisma'},
-];
-const ABILITY_TEMPLATE = {
-  abbr: '',
-  name: '',
-  score: '10',
-  score_tmp: '10',
-};
 const SHEET_TEMPLATE = {
     _id: '',
     created: new Date(),

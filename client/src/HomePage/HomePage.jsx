@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { Button, Col, Row, Table } from 'reactstrap';
 
 import { sheetActions } from '../_actions';
 
-class HomePage extends React.Component {
+class HomePage extends Component {
     componentDidMount() {
-        this.props.dispatch(sheetActions.getAll(this.props.user.id));
+        const { dispatch, user } = this.props;
+        dispatch(sheetActions.getAll(user.id));
     }
 
     handleDeleteSheet(id) {
-        return (e) => this.props.dispatch(sheetActions.delete(id));
+        const { dispatch } = this.props;
+        return (e) => dispatch(sheetActions.delete(id));
     }
 
     handleSelect(id) {

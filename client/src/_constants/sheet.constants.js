@@ -48,12 +48,3 @@ export const abilitiesEnum = Object.freeze({
         5: 'cha',
     }
 });
-
-export const skillsEnum = Object.freeze({
-    APPRAISE: 0,
-    BALANCE: 1,
-    BLUFF: 2,
-    CLIMB: 3,
-    CONCENTRATION: 4,
-    CRAFT: 5,
-});
