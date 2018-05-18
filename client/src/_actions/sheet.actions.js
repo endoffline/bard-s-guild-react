@@ -20,6 +20,8 @@ function initialize(userid) {
 function change(scope, name, value) {
     if (scope === scopesEnum.ABILITY) {
         return {type: sheetConstants.CHANGE_ABILITY, name, value};
+    } else if (scope === scopesEnum.SKILL) {
+        return {type: sheetConstants.CHANGE_SKILL, name, value};
     }
     return {type: sheetConstants.CHANGE, name, value}
 }

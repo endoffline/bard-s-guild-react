@@ -2,6 +2,7 @@ export const sheetConstants = {
     INITIALIZE: 'SHEETS_INITIALIZE',
     CHANGE: 'SHEETS_CHANGE',
     CHANGE_ABILITY: 'SHEETS_CHANGE_ABILITY',
+    CHANGE_SKILL: 'SHEETS_CHANGE_SKILL',
 
 
     CREATE_REQUEST: 'SHEETS_CREATE_REQUEST',
@@ -28,6 +29,7 @@ export const sheetConstants = {
 export const scopesEnum = Object.freeze({
     BASIC: 0,
     ABILITY: 1,
+    SKILL: 2,
 });
 
 export const abilitiesEnum = Object.freeze({
@@ -37,4 +39,21 @@ export const abilitiesEnum = Object.freeze({
     INT: 3,
     WIS: 4,
     CHA: 5,
+    properties: {
+        0: 'str',
+        1: 'dex',
+        2: 'con',
+        3: 'int',
+        4: 'wis',
+        5: 'cha',
+    }
+});
+
+export const skillsEnum = Object.freeze({
+    APPRAISE: 0,
+    BALANCE: 1,
+    BLUFF: 2,
+    CLIMB: 3,
+    CONCENTRATION: 4,
+    CRAFT: 5,
 });
